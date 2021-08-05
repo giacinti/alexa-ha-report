@@ -1,0 +1,19 @@
+# see secrets.yaml for more details
+# scan_interval is one month. can be anything (big enough) as value is updated on demand (see in scripts)
+sensor:
+  - platform: rest
+    name: "Alexa bearer token"
+    scan_interval: 2592000
+    resource: !secret alexa_token_url
+    verify_ssl: true
+    method: POST
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      payload: !secret alexa_token_payload
+      value_template: "{{ now() + timedelta(seconds=value_json.expires_in) }}"
+      json_attributes:
+        - access_token
+        - expires_in
+        - scope
+        - token_type
+

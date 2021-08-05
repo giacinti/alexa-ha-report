@@ -1,0 +1,5 @@
+alexa_ha_report:
+  name: Alexa Home Assistant Report Message
+  max: 2048
+  initial: '{"text": "Nothing to report"}'
+  

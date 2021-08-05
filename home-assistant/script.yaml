@@ -1,0 +1,36 @@
+# see secrets.yaml for more details
+
+script:
+  update_alexa_bearer_token:
+    description: 'Check if current token is expired and get a new one if needed'
+    mode: single
+    sequence:
+      - alias: "check if expired"
+        condition: template
+        value_template: "{{(now() - as_datetime(states.sensor.alexa_bearer_token.state)).total_seconds() > 0 }}"
+      - alias: "force update"
+        service: homeassistant.update_entity
+        target:
+          entity_id: sensor.alexa_bearer_token
+            
+            
+   send_alexa_notification_message_pending:
+     description: 'Send notification, a message is pending'
+     fields:
+       from:
+         description: "Alexa will announce: there is (count) messages from (from)"
+         example: "Home Assistant"
+       count:
+         description: "Alexa will announce: there is (count) messages from (from)"
+         example: "1"
+      mode: single
+      sequence:
+        - alias: "update bearer token"
+          service: script.update_alexa_bearer_token
+        - alias: "send notification"
+          service: rest_command.send_alexa_notification_message_pending
+          data:
+            from: "{{from}}"
+            count: "{{count}}"
+            user_id: !secret alexa_notification_user_id
+ 

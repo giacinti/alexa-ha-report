@@ -1,0 +1,36 @@
+# to add into your skill.json
+"manifestVersion": "1.0",
+### start
+"permissions": [
+    {
+        "name": "alexa::alerts:reminders:skill:readwrite"
+    },
+    {
+	"name": "alexa::devices:all:geolocation:read"
+    },
+    {
+	"name": "alexa::person_id:read"
+    },
+    {
+	"name": "alexa::devices:all:notifications:write"
+    }
+],
+"events": {
+    "publications": [
+	{ "eventName": "AMAZON.WeatherAlert.Activated" },
+	{ "eventName": "AMAZON.SportsEvent.Updated" },
+	{ "eventName": "AMAZON.MessageAlert.Activated" },
+	{ "eventName": "AMAZON.OrderStatus.Updated" },
+	{ "eventName": "AMAZON.Occasion.Updated" },
+	{ "eventName": "AMAZON.TrashCollectionAlert.Activated" },
+	{ "eventName": "AMAZON.MediaContent.Available" },
+	{ "eventName": "AMAZON.SocialGameInvite.Available" }
+    ],
+    "endpoint": {
+	# update with correct uri from your skill.json
+	"uri": "arn:aws:lambda:us-west-2:XXXXXXXXXXXX:function:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX:Release_0"
+    }
+},
+### end
+"privacyAndCompliance": {
+																																    

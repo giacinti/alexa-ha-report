@@ -1,0 +1,38 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "home assistant",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "ReportIntent",
+                    "slots": [],
+                    "samples": [
+                        "rapport",
+                        "faire son rapport",
+                        "message",
+			"quel est le message",
+                        "que s'est-il passé",
+                        "salut"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}

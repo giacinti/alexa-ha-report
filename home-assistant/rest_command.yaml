@@ -1,0 +1,39 @@
+# see file secrets.yaml for more details
+
+rest_command:
+  send_alexa_notification_message_pending:
+    url: !secret alexa_proactive_event_endpoint
+    method: post
+    verify_ssl: true
+    content_type: application/json
+    headers:
+      Content-Type: application/json
+      Authorization: "Bearer {{ states.sensor.alexa_bearer_token.attributes['access_token'] }}"
+    payload: |2
+      {
+           "timestamp": "{{ now().isoformat() }}",
+           "referenceId": "send-alexa-notification-message-pending",
+           "expiryTime": "{{ (now() + timedelta(days=1)).isoformat() }}",
+           "event": {
+               "name": "AMAZON.MessageAlert.Activated",
+               "payload": {
+                 "state": {
+                   "status": "UNREAD",
+                   "freshness": "NEW"
+                   },
+                   "messageGroup": {
+                     "creator": {
+                       "name": "{{from}}"
+                       },
+                       "count": {{count}}
+                   }
+               }
+           },
+           "relevantAudience": {
+               "type": "Unicast",
+               "payload": {
+                   "user": "{{user_id}}"
+               }
+           }
+      }
+
